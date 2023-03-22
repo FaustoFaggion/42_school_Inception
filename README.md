@@ -64,7 +64,7 @@ Docker also provides a centralized repository called Docker Hub, where developer
 
 ### Pull Docker Image from Docker Hub
 
-```docker pul <imagename>:<version>```
+```docker pul <imagename>:<tag>```
 
 <br>
 
