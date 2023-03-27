@@ -275,7 +275,11 @@ NGINX is open source software for:
 
 - ### Media Streaming
 
+- ### Encripting
+
 - ### and more...
+
+
 
 <br>
 
