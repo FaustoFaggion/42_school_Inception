@@ -3,7 +3,7 @@ version: '3'
 services:
 
   nginx:
-    build: ./nginx
+    build: ./reqirements/nginx
       image: "nginx"
     container_name: nginx
     ports:

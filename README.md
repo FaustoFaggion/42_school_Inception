@@ -293,9 +293,25 @@ NGINX also is frequently placed between clients and a second web server, to serv
 
 >Context - blocks of code with directives
 
+<br>
 
-### Serving a static content
+### Serving a Static Content
+---
 
+
+### NGINX Docker Image
+---
+
+- Install nginx
+- Install ssl
+- Create ssl certificate
+- Create a nginx.conf file
+
+#### **Dockerfile**
+
+>```FROM alpine:3.16```  
+``` ```  
+``` ```  
 
 
 </div>
@@ -306,3 +322,5 @@ NGINX also is frequently placed between clients and a second web server, to serv
 ---
 
 [NGINX Crash Course](https://www.youtube.com/watch?v=7VAI73roXaY)
+
+[ssl configuration](https://phoenixnap.com/kb/generate-openssl-certificate-signing-request)
