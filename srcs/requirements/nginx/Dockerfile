@@ -2,12 +2,12 @@
 FROM debian:buster
 
 #Install NGINX enviroment
-RUN apt-get update
-RUN apt-get install nginx -y
+RUN apt update && apt upgrade -y
+RUN apt install nginx -y
 
 #Install openssl
 
-RUN apt-get install openssl
+RUN apt install openssl -y
 
 # Create an RSA Private Key and CSR
 
@@ -24,13 +24,11 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 -keyout /etc/ssl/nginx.key \
 -out /etc/ssl/nginx.crt
 
-#Copy html page to nginx root directory
-COPY index.html /var/www/index.html
-COPY ./wagraton/index2.html /var/www/wagraton/index2.html
-
 #Copy .conf nginx file
 COPY conf/my_nginx.conf /etc/nginx/conf.d/
 
 #EntryPoint
-
+#The Docker daemon ( dockerd ) listens for Docker API requests
+#and manages Docker objects such as images, containers, networks, and volumes.
+#A daemon can also communicate with other daemons to manage Docker services.
 CMD ["nginx", "-g", "daemon off;"]

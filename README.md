@@ -2,13 +2,12 @@
 
 <div align="justify">
 This project aims to broaden your knowlege of system administration by using Docker.
-
+<img src="img/LEMP.png" width="500" height="200"> 
 <img src="img/inception.png" width="500" height="500"> 
 
 <br>
 
 ---
-
 
 <img src="img/docker.png" width="50" height="50"> 
 <img src="img/nginx.png" width="50" height="50">
@@ -229,6 +228,41 @@ The company that has the computer with your website files on, it's called a host
 
 > 
 
+</div>
+
+<br>
+
+## What is PHP
+---
+
+<div align="justify">
+O PHP (um acrônimo recursivo para PHP: Hypertext Preprocessor) é uma linguagem de script open source de uso geral, muito utilizada, e especialmente adequada para o desenvolvimento web e que pode ser embutida dentro do HTML.
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+<title>Exemplo</title>
+</head>
+<body>
+
+<?php
+    echo "Olá, eu sou um script PHP!";
+?>
+
+</body>
+</html>
+```
+Em vez de muitos comandos para mostrar HTML (como acontece com C ou Perl), as páginas PHP contém HTML em código mesclado que faz "alguma coisa" (neste caso, mostra "Olá, eu sou um script PHP!"). O código PHP é delimitado pelas instruções de processamento (tags) de início e fim <?php e ?> que permitem que você entre e saia do "modo PHP".
+
+O que distingue o PHP de algo como o JavaScript no lado do cliente é que o código é executado no servidor, gerando o HTML que é então enviado para o navegador. O navegador recebe os resultados da execução desse script, mas não sabe qual era o código fonte. Você pode inclusive configurar seu servidor web para processar todos os seus arquivos HTML com o PHP, e então não há como os usuários dizerem o que você tem na sua manga.
+Existem três áreas principais onde os scripts PHP são usados:
+
+- Scripts no lado do servidor (server-side).
+- Scripts de linha de comando.
+- Escrever aplicações desktop.
+
+O PHP trabalha tanto como módulo quanto como um processador CGI.
 </div>
 
 <br>

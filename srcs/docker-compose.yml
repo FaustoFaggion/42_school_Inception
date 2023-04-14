@@ -2,10 +2,95 @@ version: '3'
 
 services:
 
+  mariadb:
+    build:
+      context: ./requirements/mariadb
+      dockerfile: Dockerfile
+    container_name: mariadb
+    image: mariadb:1.0
+    environment:
+      MARIADB_ROOT_HOST: ${MARIADB_ROOT_HOST}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD} 
+      MARIADB_DATABASE: ${MARIADB_DATABASE} 
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+    volumes:
+      - "mariadb-volume:/var/lib/mysql"
+    networks:
+      - inception
+    restart: always
+
   nginx:
-    build: ./reqirements/nginx
-      image: "nginx"
+    build:
+      context: ./requirements/nginx
+      dockerfile: Dockerfile
     container_name: nginx
+    image: nginx:1.0
     ports:
-      - "80:80"
       - "443:443"
+    depends_on:
+      - wordpress
+    volumes:
+      - "wordpress-volume:/var/www/wordpress"
+    networks:
+      - inception
+    restart: always
+
+  wordpress:
+    build:
+      context: ./requirements/wordpress
+      dockerfile: Dockerfile
+    container_name: wordpress
+    image: wordpress:1.0
+    environment:
+      MARIADB_ROOT_HOST: ${MARIADB_ROOT_HOST}
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      DOMAIN_NAME: ${DOMAIN_NAME}
+      WP_TITLE: ${WP_TITLE}
+      WP_ADMIN_USR: ${WP_ADMIN_USR}
+      WP_ADMIN_PWD: ${WP_ADMIN_PWD}
+      WP_ADMIN_EMAIL: ${WP_ADMIN_EMAIL}
+      WP_USR: ${WP_USR}
+      WP_PWD: ${WP_PWD}
+      WP_EMAIL: ${WP_EMAIL}
+    depends_on:
+      - mariadb
+    volumes:
+      - "wordpress-volume:/var/www/wordpress"
+    networks:
+      - inception
+    restart: always
+
+  redis:
+    build:
+      context: ./bonus/redis
+      dockerfile: Dockerfile
+    container_name: redis
+    image: redis:1.0
+    networks:
+      - inception
+    restart: always
+    depends_on:
+      - wordpress
+
+volumes:
+  mariadb-volume:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: ${MARIADB_HOST_VOLUME_PATH}
+
+  wordpress-volume:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: ${WORDPRESS_HOST_VOLUME_PATH}
+
+networks:
+  inception:
+    driver: bridge
+    name: inception
