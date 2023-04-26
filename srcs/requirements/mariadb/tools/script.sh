@@ -1,52 +1,27 @@
 #!/bin/bash
 
-# Create Database && Securing database engine installation
 if [ ! -d "/var/lib/mysql/${MARIADB_DATABASE}" ]; then
-
-    #Change permissions for user access
+    mysql_install_db --user=mysql --datadir="/var/lib/mysql" > /dev/null
     chown -R mysql:mysql /var/lib/mysql
 
-    #Star mysql
     service mysql start
 
-    # #Create data-base
-    mysql -e "CREATE DATABASE ${MARIADB_DATABASE}"
-
-
-    # #Select DATABASE
-    mysql -e "USE ${MARIADB_DATABASE}"
-
-    #Create user and give privileges
-    mysql -e "GRANT ALL ON *.* TO '${MARIADB_USER}'@'%' IDENTIFIED BY '${MARIADB_PASSWORD}';"
-    mysql -e "GRANT ALL ON *.* TO '${MARIADB_USER}'@'localhost' IDENTIFIED BY '${MARIADB_PASSWORD}';"
-
-    #Kill the anonymous users
-    mysql -e "DELETE FROM mysql.user WHERE User=''"
-
-    # disallow remote login for root
-    mysql -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')"
-
-    #Kill off the demo database
-    mysql -e "DROP DATABASE IF EXITS test"
-    mysql -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'"
-
-    #Refresh
-    mysql -e "FLUSH PRIVILEGES"
-
-    # #Change root password
-    mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MARIADB_ROOT_PASSWORD}';"
-
-    #Update root user to use new password
-    sed -i "s/password =/password = ${MARIADB_ROOT_PASSWORD}/" /etc/mysql/debian.cnf
-
-    #Refresh
-    mysql --user=root --password=${MARIADB_ROOT_PASSWORD}
+    mysql --user=root --password="" << _EOF_
+    CREATE DATABASE ${MARIADB_DATABASE};
+    USE ${MARIADB_DATABASE};
+    GRANT ALL ON *.* TO '${MARIADB_USER}'@'%' IDENTIFIED BY '${MARIADB_PASSWORD}';
+    GRANT ALL ON *.* TO '${MARIADB_USER}'@'localhost' IDENTIFIED BY '${MARIADB_PASSWORD}';
     FLUSH PRIVILEGES;
-    EXIT;
-
-    #Stop mysql service
+    DELETE FROM mysql.user WHERE user='';
+    DELETE FROM mysql.user WHERE user='root' AND host NOT IN('localhost', '127.0.0.1', '::1');
+    DROP DATABASE IF EXISTS tests;
+    DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
+    FLUSH PRIVILEGES;
+    ALTER USER 'root'@'localhost' IDENTIFIED BY '${MARIADB_ROOT_PASSWORD}';
+    FLUSH PRIVILEGES;
+_EOF_
+    sed -i "s/password =/password = ${MARIADB_ROOT_PASSWORD}/g" /etc/mysql/debian.cnf
     service mysql stop
 fi
-    
-#Restart mysql
-mysqld_safe
+
+/usr/bin/mysqld_safe --user=mysql --datadir=/var/lib/mysql

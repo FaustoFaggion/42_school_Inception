@@ -1,3 +1,17 @@
+## Studies
+
+### TSL 
+
+https://www.hostinger.com.br/tutoriais/o-que-e-ssl-tls-https?ppc_campaign=google_search_generic_hosting_all&bidkw=defaultkeyword&lo=1001773&gclid=CjwKCAjw0ZiiBhBKEiwA4PT9zzl0j3O5NRIetMk6Xwia11MmRIuyO2TAj4CBSTxDHHpRFgWfN8NyBRoCUU4QAvD_BwE
+
+https://www.gta.ufrj.br/grad/06_1/ssl/func_tls.htm
+
+
+
+
+
+
+
 # 42_school_Inception
 
 <div align="justify">
@@ -347,14 +361,91 @@ NGINX also is frequently placed between clients and a second web server, to serv
 ``` ```  
 ``` ```  
 
-
-</div>
-
-<br>
-
 ## Links
 ---
 
 [NGINX Crash Course](https://www.youtube.com/watch?v=7VAI73roXaY)
 
 [ssl configuration](https://phoenixnap.com/kb/generate-openssl-certificate-signing-request)
+
+</div>
+
+<br>
+
+### Redis
+---
+
+A memory space cache for database content. Makes the access of most viewed
+content faster than requisitions to the database. Requires a space of memory
+into the host.
+
+<br>
+
+
+### FTP (File TRansfer Protocol)
+---
+
+- Protocolo para transferência de arquivos entre dois hosts (um cliente e um servidor).
+- Esta definido na RFC 959.
+- Protocolo da camada de aplicação TCP/IP - suporta compartilhamento de arquivos em redes TCP/IP e mais antigas.
+- Utiliza conexões de dado e controle separadamente. Os dados são transferidos pela porta 20, e a porta 21 transmite informações de controle.
+- Clientes podem se autenticar por meio de usuário senha, ou conexão anônima (se o servidor permitir)
+- É possível proteger o nome de usuário e senha usando SSL/TLS, na forma de FTPS, ou usando SFTP(SSH File Transfer Protocol).
+
+#### Modos de Conexão
+
+O modo de conexão determina como a conexão de dados é estabelecida.
+O cliente cria uma conexão TCP a partir de uma porta aleatória com a porta 21 do servidor FTP.
+O FTP pode operar de dois modos: Ativo ou Passivo.
+
+#### Ativo
+
+- O cliente escuta conexões de dados que chegam do servidor em uma porta informada.
+- O servidor inicia um canal de dados a partir de sua porta 20.
+- Problemática se o cliente estiver atrás de um firewall ou roteador NAT.
+
+#### Passivo
+
+- O cliente usa a conexão de controle para enviar um comando PASV ao servidor e recebe um endereçoIP e número de porta aleatório como resposta, que serão usados para iniciar um canal de dados a partir de outra porta açeatória no cliente.
+- Usada geralmente quando o cliente não consegue receber conexões TCP de entrada, por exemplo por conta de um firewall na rede.
+
+#### Modos de Representação de Dados
+
+Na transferência, os dados podem ser representados principalmente como:
+
+- ASCII- Usado para texto.
+- Binário (Imagem) - Para arquivos em geral.
+	No modo binário, os dados são transmitidos byte por byte.
+
+Exitem outros modos como o EBCDIC e Local.
+
+#### Modos de Transferência de Dados
+
+- STREAM - Dados enviados em um fluxo contínuo. Todos processamento é realizado pelo TCP.
+- BLOCK - Dados são divididos em vários blocos pelo FTP, e então repassados ao TCP para transmissão.
+- COMPRIMIDO - Dados são comprimidos usando algum algoritimo. 
+
+#### FTP Anônimo
+
+- Um servidor pode oferecer o serviço de FTP Anônimo, no qual os usuários se loguem com uma conta anonymous, sem o emprego de senha- o servidor muitas vezes pede o e-mail do usuário como "senha". Porém, nenhuma verificação é realizada.
+- No geral, é empregada por servidores que armazenam atualizações de softwares para os clientes baxarem.
+
+#### Security
+
+- The FTP was not created to be a secure protocol, and it is apt t osuffer a lots of attacks, like brutal force, packages capturing, spoofing, and others.
+- FTP do not encrypt the transmited data, including names and passwords.
+- The encrypt problem can be solved using the safe version of FTP, like FTPS, or can be transmited by a SSH tunel or VPN (most commum).
+
+#### FTP CLients
+
+A FTP client is a software that connects to a server to require file transfer, as dwnload or upload.
+
+The FTP client can be a command line or a graphic application (or web).
+
+## Links
+---
+What is FTP https://www.youtube.com/watch?v=C_EE0qoREUM
+
+FTP with WORDPRESS https://www.youtube.com/watch?v=TyqwwAzwLuM
+
+<br>
