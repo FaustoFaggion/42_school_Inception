@@ -84,27 +84,33 @@ Docker also provides a centralized repository called Docker Hub, where developer
 
 	- su - < user >
 
-3. Update apt
+3. Set up repository
+
+	A. Update the apt package index and install packages to allow apt to use a repository over HTTPS:
 	
-	- ```sudo apt update ```
 	- ```sudo apt-get update ```
+	- ```sudo apt-get install ca-certificates curl gnupg```
+	
+	B. Add Docker's official GPG key
 
-4. Install packages to allow ```apt``` to use the repository over HTTPS
+	- ```sudo install -m 0755 -d /etc/apt/keyrings```
+	- ```curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg```
+	- sudo chmod a+r /etc/apt/keyrings/docker.gpg```
 
-	- ```sudo apt install apt-transport-https ca-certificates curl gnupg lsb-release```
+	C. Use the following command to set up the repository
 
-5. Add Docker's official GPG key
+	- ```echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null```
 
-	- ```wget https://download.docker.com/linux/debian/gpg```
-	- ```sudo apt-key add pgpg```
+  4. Install Docker Engine
 
-6. Set up the Docker Repository
+	A. Update the apt package index
 
-	- ```echo "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list```
-	- ```sudo apt update ```
-	- ```sudo apt-get update ```
+		- ```sudo apt-get update
 
-7. Install Docker Engine, containerd and Docker Compose
+	B. Install Docker Engine, containerd and Docker Compose
 
 	- ```sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin```
 

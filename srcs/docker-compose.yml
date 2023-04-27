@@ -7,7 +7,7 @@ services:
       context: ./bonus/redis
       dockerfile: Dockerfile
     container_name: redis
-    image: redis
+    image: redis:1.0
     depends_on:
       - wordpress
     networks:
@@ -19,7 +19,7 @@ services:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
     container_name: mariadb
-    image: mariadb
+    image: mariadb:1.0
     environment:
       MARIADB_ROOT_HOST: ${MARIADB_ROOT_HOST}
       MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD} 
@@ -37,7 +37,7 @@ services:
       context: ./requirements/nginx
       dockerfile: Dockerfile
     container_name: nginx
-    image: nginx
+    image: nginx:1.0
     ports:
       - "443:443"
     depends_on:
@@ -53,7 +53,7 @@ services:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
     container_name: wordpress
-    image: wordpress
+    image: wordpress:1.0
     environment:
       MARIADB_ROOT_HOST: ${MARIADB_ROOT_HOST}
       MARIADB_DATABASE: ${MARIADB_DATABASE}

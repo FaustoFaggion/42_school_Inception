@@ -35,4 +35,4 @@ if [ ! -f "/var/www/wordpress/wp-config.php" ]; then
     	wp redis enable --allow-root
 fi
 
-php-fpm7.3 -F
+php-fpm7.3 --nodaemonize
