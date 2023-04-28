@@ -15,5 +15,8 @@ docker volume rm $(docker volume ls -q)
 # Remove all networks
 docker network rm $(docker network ls -q) 2>/dev/null
 
+# Remove volumes into host
+sudo rm -rf /home/fagiusep
+
 # Remove all images and containers
 docker system prune -a
