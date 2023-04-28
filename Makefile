@@ -19,6 +19,9 @@ fclean: clean
 
 re: fclean all
 
+up:
+	@docker-compose -f $(DOCKER_COMPOSE) up -d
+
 stop:
 	@ docker stop nginx mariadb wordpress
 
