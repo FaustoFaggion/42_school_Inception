@@ -4,7 +4,7 @@ services:
 
   redis:
     build:
-      context: ./bonus/redis
+      context: ./requirements/bonus/redis
       dockerfile: Dockerfile
     container_name: redis
     image: redis:1.0
